@@ -1,0 +1,16 @@
+@{
+    ViewData["Title"] = "Logout";
+}
+<div class="container d-flex align-items-center justify-content-center min-vh-100">
+    <div class="card shadow-lg p-4 text-center" style="max-width: 350px; width: 100%;">
+        <div class="mb-3">
+            <i class="bi bi-box-arrow-right" style="font-size: 2.5rem; color: #dc3545;"></i>
+        </div>
+        <h2 class="fw-bold mb-3">Logout</h2>
+        <p class="mb-4">Are you sure you want to log out?</p>
+        <form asp-action="Logout" method="post">
+            <button type="submit" class="btn btn-danger w-100 mb-2">Logout</button>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary w-100">Cancel</a>
+        </form>
+    </div>
+</div>

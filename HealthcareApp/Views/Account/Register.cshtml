@@ -1,0 +1,42 @@
+@model RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+<div class="container d-flex align-items-center justify-content-center min-vh-100">
+    <div class="card shadow-lg p-4" style="max-width: 450px; width: 100%;">
+        <div class="text-center mb-4">
+            <i class="bi bi-person-plus" style="font-size: 3rem; color: #0d6efd;"></i>
+            <h2 class="fw-bold mt-2">Create Account</h2>
+        </div>
+        <form asp-action="Register" method="post">
+            <div asp-validation-summary="All" class="text-danger mb-3"></div>
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" class="form-control" placeholder="Enter your email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="FullName" class="form-label"></label>
+                <input asp-for="FullName" class="form-control" placeholder="Enter your full name" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Password" class="form-label"></label>
+                <input asp-for="Password" class="form-control" placeholder="Create a password" type="password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="ConfirmPassword" class="form-label"></label>
+                <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm your password" type="password" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Register</button>
+        </form>
+        <div class="text-center mt-3">
+            <span>Already have an account?</span> <a asp-action="Login" class="text-primary">Login</a>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

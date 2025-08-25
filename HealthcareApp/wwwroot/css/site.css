@@ -1,0 +1,90 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  background: #f8fafc;
+  font-family: "Segoe UI", "Roboto", Arial, sans-serif;
+}
+
+.card {
+  border-radius: 1rem;
+  border: none;
+}
+
+.btn-primary,
+.bg-primary {
+  background-color: #0d6efd !important;
+  border-color: #0d6efd !important;
+}
+
+.btn-outline-primary {
+  border-color: #0d6efd !important;
+  color: #0d6efd !important;
+}
+
+.btn-outline-primary:hover {
+  background-color: #0d6efd !important;
+  color: #fff !important;
+}
+
+h1,
+h2,
+h3,
+.fw-bold {
+  font-weight: 700 !important;
+}
+
+.hero-section {
+  background: linear-gradient(90deg, #e3f0ff 0%, #f8fafc 100%);
+  border-radius: 1.5rem;
+  padding: 3rem 2rem;
+  margin-bottom: 2rem;
+}
+
+input.form-control,
+.form-control:focus {
+  border-radius: 0.5rem;
+  box-shadow: none;
+  border-color: #b6d4fe;
+}
+
+footer.footer {
+  background: #f8fafc;
+  color: #6c757d;
+  border-top: 1px solid #e3e3e3;
+}
+
+.navbar {
+  border-radius: 0 0 1rem 1rem;
+}
+
+.form-floating > .form-control-plaintext::placeholder,
+.form-floating > .form-control::placeholder {
+  color: var(--bs-secondary-color);
+  text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder,
+.form-floating > .form-control:focus::placeholder {
+  text-align: start;
+}
