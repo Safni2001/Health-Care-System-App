@@ -36,14 +36,14 @@ namespace HealthcareApp.Controllers
                     UserName = model.Email,
                     Email = model.Email,
                     FullName = model.FullName,
-                    Role = "Patient" // Restrict to Patient for public registration
+                    Role = "Patient" // Always assign Patient role for public registration
                 };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await _userManager.AddToRoleAsync(user, "Patient");
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Patient"); // Redirect to Patient dashboard
                 }
                 foreach (var error in result.Errors)
                 {
@@ -55,7 +55,7 @@ namespace HealthcareApp.Controllers
 
         // GET: /Account/Login
         [HttpGet]
-        public IActionResult Login(string returnUrl = null)
+        public IActionResult Login(string? returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             return View();
@@ -64,13 +64,35 @@ namespace HealthcareApp.Controllers
         // POST: /Account/Login
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
+        public async Task<IActionResult> Login(LoginViewModel model, string? returnUrl = null)
         {
             if (ModelState.IsValid)
             {
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
+                    // Get user and their role for redirection
+                    var user = await _userManager.FindByEmailAsync(model.Email);
+                    if (user != null)
+                    {
+                        var role = user.Role;
+                        
+                        // Role-based redirection
+                        if (role == "Admin")
+                        {
+                            return RedirectToAction("Index", "Admin");
+                        }
+                        else if (role == "Doctor")
+                        {
+                            return RedirectToAction("Index", "Doctor");
+                        }
+                        else if (role == "Patient")
+                        {
+                            return RedirectToAction("Index", "Patient");
+                        }
+                    }
+                    
+                    // Fallback to returnUrl or home
                     return RedirectToLocal(returnUrl);
                 }
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
@@ -87,9 +109,9 @@ namespace HealthcareApp.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        private IActionResult RedirectToLocal(string returnUrl)
+        private IActionResult RedirectToLocal(string? returnUrl)
         {
-            if (Url.IsLocalUrl(returnUrl))
+            if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
                 return Redirect(returnUrl);
             return RedirectToAction("Index", "Home");
         }

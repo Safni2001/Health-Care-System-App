@@ -88,3 +88,65 @@ footer.footer {
 .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+/* Dashboard specific styles */
+.border-left-primary {
+  border-left: 0.25rem solid #4e73df !important;
+}
+
+.border-left-success {
+  border-left: 0.25rem solid #1cc88a !important;
+}
+
+.border-left-info {
+  border-left: 0.25rem solid #36b9cc !important;
+}
+
+.border-left-warning {
+  border-left: 0.25rem solid #f6c23e !important;
+}
+
+.text-gray-800 {
+  color: #5a5c69 !important;
+}
+
+.text-gray-300 {
+  color: #dddfeb !important;
+}
+
+.text-xs {
+  font-size: 0.7rem !important;
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+/* Table styles */
+.table-responsive {
+  border-radius: 0.5rem;
+}
+
+.table th {
+  border-top: none;
+  font-weight: 600;
+  color: #5a5c69;
+}
+
+/* Badge styles */
+.badge {
+  font-size: 0.75rem;
+  padding: 0.5rem 0.75rem;
+}
+
+/* Dropdown styles */
+.dropdown-menu {
+  border-radius: 0.5rem;
+  border: none;
+  box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fc;
+}
