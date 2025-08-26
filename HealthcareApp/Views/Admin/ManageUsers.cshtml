@@ -1,0 +1,90 @@
+@model List<UserManagementViewModel>
+@{
+    ViewData["Title"] = "Manage Users";
+}
+
+<div class="container-fluid py-4">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="h3 mb-0 text-gray-800">User Management</h1>
+            <p class="text-muted">Manage user roles and permissions</p>
+        </div>
+    </div>
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["Message"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">All Users</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="usersTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Current Role</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var user in Model)
+                        {
+                            <tr>
+                                <td>@user.FullName</td>
+                                <td>@user.Email</td>
+                                <td>
+                                    <span class="badge bg-@(user.Role == "Admin" ? "danger" : user.Role == "Doctor" ? "success" : "info")">
+                                        @user.Role
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="badge bg-@(user.IsActive ? "success" : "warning")">
+                                        @(user.IsActive ? "Active" : "Inactive")
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown">
+                                            Change Role
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#" onclick="changeRole('@user.Id', 'Admin')">Admin</a></li>
+                                            <li><a class="dropdown-item" href="#" onclick="changeRole('@user.Id', 'Doctor')">Doctor</a></li>
+                                            <li><a class="dropdown-item" href="#" onclick="changeRole('@user.Id', 'Patient')">Patient</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form id="roleChangeForm" asp-action="ChangeUserRole" method="post" style="display: none;">
+    <input type="hidden" id="userId" name="userId" />
+    <input type="hidden" id="newRole" name="newRole" />
+</form>
+
+@section Scripts {
+    <script>
+        function changeRole(userId, newRole) {
+            if (confirm('Are you sure you want to change this user\'s role to ' + newRole + '?')) {
+                document.getElementById('userId').value = userId;
+                document.getElementById('newRole').value = newRole;
+                document.getElementById('roleChangeForm').submit();
+            }
+        }
+    </script>
+}

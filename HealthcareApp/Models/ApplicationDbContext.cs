@@ -1,13 +1,17 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using HealthcareApp.Models;
 
-public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+namespace HealthcareApp.Models
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
-
-    protected override void OnModelCreating(ModelBuilder builder)
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        base.OnModelCreating(builder);
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+        }
     }
 }
