@@ -1,0 +1,61 @@
+@model IEnumerable<HealthcareApp.Models.Appointment>
+@{
+    ViewData["Title"] = "Reports";
+}
+<h2>Reports</h2>
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Appointments</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.TotalAppointments</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Payments</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">@((decimal)ViewBag.TotalPayments)</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Patients</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.PatientCount</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Doctors</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.DoctorCount</div>
+            </div>
+        </div>
+    </div>
+</div>
+<h4>Recent Appointments</h4>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>When</th>
+            <th>Doctor</th>
+            <th>Payment</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var a in Model)
+    {
+        <tr>
+            <td>@a.ScheduledAt</td>
+            <td>@a.Doctor?.FullName</td>
+            <td>@a.Payment.ToString("C")</td>
+            <td>@a.Status</td>
+        </tr>
+    }
+    </tbody>
+</table>

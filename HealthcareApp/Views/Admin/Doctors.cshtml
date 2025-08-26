@@ -1,0 +1,41 @@
+@model IEnumerable<HealthcareApp.Models.Doctor>
+@{
+    ViewData["Title"] = "Doctors";
+}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Doctors</h2>
+    <a class="btn btn-primary" asp-action="CreateDoctor">Add Doctor</a>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Specialty</th>
+            <th>Fee</th>
+            <th>Availability</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var d in Model)
+    {
+        <tr>
+            <td>@d.FullName</td>
+            <td>@d.Email</td>
+            <td>@d.Phone</td>
+            <td>@d.Specialty?.Name</td>
+            <td>@d.ConsultationFee.ToString("C")</td>
+            <td>@d.Availability</td>
+            <td class="text-end">
+                <a class="btn btn-sm btn-outline-secondary" asp-action="EditDoctor" asp-route-id="@d.Id">Edit</a>
+                <form asp-action="DeleteDoctor" method="post" class="d-inline" onsubmit="return confirm('Delete this doctor?');">
+                    <input type="hidden" name="id" value="@d.Id" />
+                    <button class="btn btn-sm btn-outline-danger" type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

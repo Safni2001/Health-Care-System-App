@@ -1,0 +1,47 @@
+@model HealthcareApp.Models.Doctor
+@{
+    ViewData["Title"] = "Edit Doctor";
+}
+<h2>Edit Doctor</h2>
+<form asp-action="EditDoctor" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="mb-3">
+        <label asp-for="FullName" class="form-label"></label>
+        <input asp-for="FullName" class="form-control" />
+        <span asp-validation-for="FullName" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Phone" class="form-label"></label>
+        <input asp-for="Phone" class="form-control" />
+        <span asp-validation-for="Phone" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Specialty</label>
+        <select asp-for="SpecialtyId" class="form-select" asp-items="@(new SelectList(ViewBag.Specialties, "Id", "Name"))"></select>
+        <span asp-validation-for="SpecialtyId" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="ConsultationFee" class="form-label"></label>
+        <input asp-for="ConsultationFee" class="form-control" />
+        <span asp-validation-for="ConsultationFee" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Availability" class="form-label"></label>
+        <input asp-for="Availability" class="form-control" />
+        <span asp-validation-for="Availability" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="ScheduleNotes" class="form-label"></label>
+        <textarea asp-for="ScheduleNotes" class="form-control"></textarea>
+    </div>
+    <button class="btn btn-primary" type="submit">Update</button>
+    <a asp-action="Doctors" class="btn btn-secondary">Cancel</a>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
