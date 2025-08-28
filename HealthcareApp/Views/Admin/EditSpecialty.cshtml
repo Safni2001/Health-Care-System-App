@@ -1,0 +1,22 @@
+@model HealthcareApp.Models.Specialty
+@{
+    ViewData["Title"] = "Edit Specialty";
+}
+<h2>Edit Specialty</h2>
+<form asp-action="EditSpecialty" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+    </div>
+    <button class="btn btn-primary" type="submit">Update</button>
+    <a asp-action="Specialties" class="btn btn-secondary">Cancel</a>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
